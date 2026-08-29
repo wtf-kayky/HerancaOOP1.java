@@ -1,13 +1,69 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+package SistemaDePersonagens;
+public abstract class Personagem {
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+    private String nome;
+    private int nivel;
+    private int vida;
+    private int experiencia;
+
+
+    public Personagem(String nome) {
+        this.nome = nome;
+        this.nivel = 1;
+        this.vida = 100;
+        this.experiencia = 0;
     }
+
+
+
+    public int getVida() {
+        return vida;
+    }
+
+
+
+    public int getNivel() {
+        return nivel;
+    }
+
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    public void receberDano(int dano){
+        this.vida = this.vida - dano;
+        if (this.vida > 0 ){
+            System.out.println("Vida atual " + this.vida);
+        }
+        if (this.vida <= 0){
+            this.vida = 0;
+            System.out.println("Vida atual: " + this.vida);
+
+        }
+    }
+    public void receberCura(int cura) {
+
+        this.vida = this.vida + cura;
+        if (this.vida > 100){
+            this.vida = 100;
+            System.out.println(" Vida atual " + this.vida);
+        }
+    }
+
+    public void Ganharxp(int xp){
+        this.experiencia = experiencia + xp;
+        if (experiencia >= 100){
+            this.nivel++;
+            System.out.println(" nivel atual " + nivel);
+            experiencia = 0;
+        }
+    }
+    public void Status(){
+        System.out.println("Nome" + this.nome +"\n" + "Vida" + this.vida + "\n" + "Nivel" + this.nivel);
+    }
+    public abstract void habilidades();
 }
